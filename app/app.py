@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 
 app = Flask(__name__)
@@ -5,7 +7,11 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Hello from my DevOps Docker application!"
+    message = os.getenv(
+        "FLASK_MESSAGE",
+        "Hello from my DevOps Docker application!"
+    )
+    return message
 
 
 @app.route("/health")
